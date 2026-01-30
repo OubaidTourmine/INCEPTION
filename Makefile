@@ -23,3 +23,29 @@ down:
 	$(COMPOSE) down
 
 start:
+	$(COMPOSE) start
+
+stop:
+	$(COMPOSE) stop
+
+restart:
+	$(COMPOSE) restart
+
+logs:
+	$(COMPOSE) logs -f
+
+ps:
+	$(COMPOSE) ps
+
+config:
+	$(COMPOSE) config
+
+clean:
+	$(COMPOSE) down --remove-orphans
+
+fclean:
+	$(COMPOSE) down --rmi all --volumes --remove-orphans
+	@test -n "$(DATA_DIR)" && test "$(DATA_DIR)" != "/"
+	rm -rf "$(DATA_DIR)/mariadb" "$(DATA_DIR)/wordpress"
+
+re: fclean all
