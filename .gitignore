@@ -1,0 +1,13 @@
+# Private local configuration and credentials
+srcs/.env
+secrets/*
+
+# Allow safe templates to be shared if they are added later
+!srcs/.env.example
+!secrets/.gitkeep
+
+# Local editor and operating-system files
+.DS_Store
+*.swp
+*.swo
+*.log
