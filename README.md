@@ -42,3 +42,47 @@ Useful commands:
 ```sh
 make ps       # show service status
 make logs     # follow container logs
+make stop     # stop containers without removing them
+make down     # remove containers and network
+make re       # rebuild from scratch; removes persistent data
+```
+
+## Resources
+
+- [Docker documentation](https://docs.docker.com/)
+- [Docker Compose documentation](https://docs.docker.com/compose/)
+- [NGINX documentation](https://nginx.org/en/docs/)
+- [WordPress documentation](https://wordpress.org/documentation/)
+- [MariaDB documentation](https://mariadb.com/kb/en/documentation/)
+- [OWASP Docker Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html)
+
+### AI usage
+
+AI was used to help review the subject requirements and draft the documentation structure. All configuration, commands, and technical explanations are reviewed and must be understood and tested by the project author before submission.
+
+## Virtual Machines vs Docker containers
+
+### Container vs Virtual Machine
+
+Virtual Machine:
+- Has full guest OS and its own kernel
+- Strong isolation but heavier resource overhead
+
+Container:
+- Shares host kernel
+- Isolated process/filesystem/network view
+- Faster startup, lighter footprint
+
+Inception uses containers because it needs multiple isolated services with low overhead.
+
+### Secrets vs Environment Variables
+
+Environment variables are easy to inject but can leak via process inspection or logs. Docker secrets are mounted as files and reduce exposure. This project uses secrets for database credentials and env vars for non-sensitive configuration.
+
+### Docker Network vs Host Network
+
+A Docker network provides isolated service-to-service communication without exposing internal ports on the host. Host networking removes isolation and is forbidden by the subject. This project uses a dedicated bridge network.
+
+### Docker Volumes vs Bind Mounts
+
+Bind mounts map arbitrary host paths directly into containers, which can be flexible but less portable. Named volumes are managed by Docker and are more predictable. This project uses named volumes mapped to `/home/<login>/data` as required.
