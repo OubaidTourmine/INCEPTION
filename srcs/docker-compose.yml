@@ -66,3 +66,38 @@ services:
 
   static:
     container_name: static
+    build: ./requirements/bonus/static
+    image: static:notlatest
+    restart: always
+    networks:
+      - inception
+    env_file:
+      - .env
+
+
+volumes:
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${DATA_DIR}/mariadb
+      o: bind
+
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${DATA_DIR}/wordpress
+      o: bind
+
+networks:
+  inception:
+    driver: bridge
+
+secrets:
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  db_password:
+    file: ../secrets/db_password.txt
+  credentials:
+    file: ../secrets/credentials.txt
