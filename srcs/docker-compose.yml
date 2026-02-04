@@ -1,0 +1,34 @@
+services:
+  mariadb:
+    container_name: mariadb
+    networks:
+      - inception
+    build: ./requirements/mariadb
+    image: mariadb:notlatest
+    pull_policy: build
+    env_file: .env
+    secrets:
+      - db_root_password
+      - db_password
+    volumes:
+      - mariadb:/var/lib/mysql
+    restart: always
+    expose:
+      - "3306"
+
+  nginx:
+    container_name: nginx
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    build:
+      context: ./requirements/nginx
+      args:
+        DOMAIN_NAME: ${DOMAIN_NAME}
+    image: nginx:notlatest
+    pull_policy: build
+    env_file: .env
+    volumes:
+      - wordpress:/var/www/wordpress
+    restart: always
