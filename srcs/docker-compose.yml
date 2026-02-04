@@ -32,3 +32,37 @@ services:
     volumes:
       - wordpress:/var/www/wordpress
     restart: always
+    ports:
+      - "443:443"
+
+  wordpress:
+    container_name: wordpress
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+    build: ./requirements/wordpress
+    image: wordpress:notlatest
+    pull_policy: build
+    env_file: .env
+    secrets:
+      - db_password
+      - credentials
+    volumes:
+      - wordpress:/var/www/wordpress
+    restart: always
+    expose:
+      - "9000"
+    
+  adminer:
+    container_name: adminer
+    build: ./requirements/bonus/adminer
+    image: adminer:notlatest
+    restart: always
+    networks:
+      - inception
+    env_file:
+      - .env
+
+  static:
+    container_name: static
