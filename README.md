@@ -29,7 +29,7 @@ From the repository root:
 make
 ```
 
-The Makefile creates the persistent data directories and builds then starts the stack. By default data is placed in `$HOME/data`. To use the subject's required path explicitly, run:
+The Makefile creates the persistent data directories and builds then starts the stack. By default data is placed in `/home/outourmi/data` (the Makefile’s `DATA_DIR` default). To use the subject's required path explicitly, run:
 
 ```sh
 make DATA_DIR=/home/outourmi/data
