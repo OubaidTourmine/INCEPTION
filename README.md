@@ -86,3 +86,7 @@ A Docker network provides isolated service-to-service communication without expo
 ### Docker Volumes vs Bind Mounts
 
 Bind mounts map arbitrary host paths directly into containers, which can be flexible but less portable. Named volumes are managed by Docker and are more predictable. This project uses named volumes mapped to `/home/<login>/data` as required.
+
+## Check configuration
+
+Run `make config` to inspect the resolved Compose configuration before starting the stack. This uses the same Compose file and `DATA_DIR` setting as the other Makefile targets.
