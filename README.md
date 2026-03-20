@@ -90,3 +90,7 @@ Bind mounts map arbitrary host paths directly into containers, which can be flex
 ## Check configuration
 
 Run `make config` to inspect the resolved Compose configuration before starting the stack. This uses the same Compose file and `DATA_DIR` setting as the other Makefile targets.
+
+## Inspect running services
+
+Use `make ps` from the repository root to display the Compose service status. Use `make logs` to follow the stack logs; press Ctrl+C to stop following them.
